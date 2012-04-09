@@ -1,0 +1,11 @@
+
+.flash-message {
+  background: #d5ebff;
+  padding: 5px;
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.form-actions {
+  padding: 10px;
+}

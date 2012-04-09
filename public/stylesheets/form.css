@@ -1,0 +1,74 @@
+.form {
+  background: #EDF7FA;
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px#888;
+  box-shadow: 0 0 5px #888;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.form .item {
+  margin-bottom: 5px;
+}
+
+.form .item label {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 0px;
+}
+
+.form .item-inline {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+form .item textarea {
+  width: 350px;
+  height: 70px;
+}
+
+
+.form .item input[type='text'], .form .item input[type='password'] {
+  width: 200px;
+  margin-top: 0px;
+  padding: 2px;
+}
+
+
+.buttons {
+  margin-bottom: 10px;
+}
+
+.errorSummary {
+  background: #FFFFE8;
+  padding: 5px;
+  border: 1px solid #DEDDC1;
+  margin-bottom: 10px;
+}
+
+.errorSummary p {
+  font-weight: bold;
+}
+
+.errorSummary ul {
+  padding-left: 10px;
+  margin-left: 10px;
+  list-style: circle;
+}
+
+.form .item label.error {
+  color: #BA6059;
+  font-weight: bold;
+}
+
+.form h3 {
+  font-size: 16px;
+  font-weight: normal;
+  border-bottom: 1px solid #999;
+  margin-bottom: 10px;
+}
+
+.form label span.required {
+  color: #C3593C;
+  font-weight: bold;
+}
