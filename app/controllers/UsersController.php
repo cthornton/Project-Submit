@@ -18,7 +18,7 @@ class UsersController extends Controller {
     if($this->isPost()) {
       $user->setAttributes($_POST['User']);
 
-      $user->role = $_POST['User']['role'];
+      $user->role_id = $_POST['User']['role_id'];
       if($user->save()) {
         $this->flash("success", "Your user account has been created");
         return $this->redirect(array('users/login'));

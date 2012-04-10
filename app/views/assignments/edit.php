@@ -6,5 +6,5 @@
   );
   
   echo $this->page_title('Edit Assignment');
-  $this->renderPartial('form', array('assignment' => $assignment));
+  $this->renderPartial('_form', array('assignment' => $assignment));
 ?>

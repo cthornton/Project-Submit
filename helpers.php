@@ -4,6 +4,12 @@
  */
 
  
+define('APP_TIMESTAMP', 'MM/dd/yyyy hh:mm a');
+define('APP_SQL_TIMESTAMP', 'yyyy-MM-dd HH:mm:ss');
+define('THE_SQL_TIMESTAMP', 'Y-m-d H:i:s');
+define('HUMAN_TIMESTAMP', 'F j \a\t g:i a');
+ 
+ 
 /**
  * Gets the current application. Shorthand for Yii::app()
  */
@@ -31,11 +37,11 @@ function javascript_include_tag($name) {
   return CHtml::scriptFile('/scripts/' . $name);
 }
 
-function form_for(ModelBase $model, $block) {
+function form_for(ModelBase $model, $block, $htmlOptions = array()) {
   $helper = new FormHelper($model);
   ob_start();
   $block($helper);
-  $content = CHtml::beginForm($helper->form_action, $helper->form_method, $helper->form_attributes);
+  $content = CHtml::beginForm($helper->form_action, $helper->form_method, $htmlOptions);
   $content .= CHtml::errorSummary($model);
   $content .= ob_get_clean();
   return $content . CHtml::endForm();

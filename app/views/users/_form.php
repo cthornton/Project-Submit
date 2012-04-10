@@ -30,8 +30,8 @@
   
   <?php if($user->isNewRecord) { ?>
   <div class="item">
-    <?php echo $f->label('role'); ?>
-    <?php echo $f->dropDownList('role', array(2 => 'Professor', 3 => 'Student')); ?>
+    <?php echo $f->label('role_id'); ?>
+    <?php echo $f->dropDownList('role_id', array(2 => 'Professor', 3 => 'Student')); ?>
   </div>
   <?php } else { ?>
   <div class="item">

@@ -25,7 +25,7 @@ class User extends ModelBase {
     return array(
       'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
       'courses' => array(self::HAS_MANY, 'Course', 'user_id'),
-      'groups'  => array(self::MANY_MANY, 'CourseGroup', 'course_groups_users(user_id, course_group_id)'),
+      'groups'  => array(self::MANY_MANY, 'Group', 'course_groups_users(user_id, course_group_id)'),
       'enrolls' => array(self::MANY_MANY, 'Course', 'courses_users(course_id, user_id)')
     );
   }
@@ -33,6 +33,18 @@ class User extends ModelBase {
   
   public function attributeLabels() {
     return array('role' => 'User Type');
+  }
+  
+  public function getIsProfessor() {
+    return $this->role->system_name == 'professor';
+  }
+  
+  public function getIsAdmin() {
+    return $this->role->system_name == 'admin';
+  }
+  
+  public function getIsStudent() {
+    return $this->role->system_name == 'student';
   }
   
   
@@ -44,7 +56,7 @@ class User extends ModelBase {
       array('password_confirmation', 'safe'),
 
       // Allow role assignment if it's a "safe" role only on register
-      array('role', 'in', 'range' => array(2, 3), 'on' => 'register'),
+      array('role_id', 'in', 'range' => array(2, 3), 'on' => 'register'),
       
       array('username, email, first_name, last_name, role', 'required'),
       array('password, password_confirmation', 'required', 'on' => 'register'),

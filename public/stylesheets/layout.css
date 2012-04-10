@@ -9,3 +9,11 @@
 .form-actions {
   padding: 10px;
 }
+
+small a {
+  color: #999;
+}
+
+.page-title {
+  margin-bottom: 15px;
+}

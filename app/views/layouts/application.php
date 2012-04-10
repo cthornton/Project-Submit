@@ -54,7 +54,11 @@ Yii::app()->clientScript->registerCoreScript('jquery');
     
 		
 		<div class="subheader">
-      
+      <?php
+        $this->widget('zii.widgets.CBreadcrumbs', array(
+          'links'=>$this->breadcrumbs,
+        ));
+      ?>
 		</div>
 		
     <?php
@@ -65,9 +69,10 @@ Yii::app()->clientScript->registerCoreScript('jquery');
             echo '<div class="alert alert-' . $key . '"><a class="close" data-dismiss="alert" href="#">x</a>' . $message . "</div>\n";
         echo '</div>';
       }
+      
+      echo $content;
+      
     ?>
-    
-    <?php echo $content; ?>
 
 		<div class="footer">
 			<p><a href="#">RSS Feed</a> | <a href="#">Contact</a> | <a href="#">Accessibility</a> | <a href="#">Products</a> | <a href="#">Disclaimer</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> and <a href="http://validator.w3.org/check?uri=referer">XHTML</a><br />

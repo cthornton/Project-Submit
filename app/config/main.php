@@ -25,6 +25,10 @@ return array(
 
   // application components
   'components'=>array(
+    'request' => array(
+      'enableCsrfValidation'=>true,
+      'enableCookieValidation'=>true,
+    ),
     'user'=>array(
       'class' => 'WebUser',
       'loginUrl' => array('users/login'),

@@ -11,8 +11,9 @@
   <?php
     if($course->isNewRecord)
       echo link_to('Back', $th->user, array('class' => 'btn'));
-    else
+    else {
       echo link_to('Back', $course, array('class' => 'btn'));
+    }
   ?>
 </div>
 <?php }) ?>

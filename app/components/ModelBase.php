@@ -22,7 +22,28 @@ abstract class ModelBase extends CActiveRecord {
       $this->beforeCreate();
     else
       $this->beforeUpdate();
+     
+    foreach($this->tableSchema->columns as $col) {
+      if($col->dbType == 'datetime' && $col->name != 'created_at' && $col->name != 'updated_at') {
+        $attr = $this->getAttribute($col->name);
+        if(is_int($attr)) {
+          $this->setAttribute($col->name, date(THE_SQL_TIMESTAMP, $attr));
+        } elseif(is_string($attr)) {
+          $timestamp = CDateTimeParser::parse($attr, APP_TIMESTAMP);
+          if($timestamp)
+            $this->setAttribute($col->name, date(THE_SQL_TIMESTAMP, $timestamp));
+        }
+      }
+    }
     return parent::beforeSave();
+  }
+  
+  public function timestampize($attribute, $format = null) {
+    $ts = CDateTimeParser::parse($this->getAttribute($attribute), APP_SQL_TIMESTAMP);
+    if($format == null)
+      return $ts;
+    else
+      return date($format, $ts);
   }
   
   /**

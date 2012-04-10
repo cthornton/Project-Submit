@@ -6,19 +6,44 @@ class GroupsController extends Controller {
   public function accessRules() {
     return array(
       array('allow', 'actions' => array('new', 'edit', 'delete'), 'roles' => array('admin', 'professor', 'student')),
-      array('allow', 'actions' => array('logout', 'view', 'edit', 'index'), 'users' => array('@')),
+      array('allow', 'actions' => array('logout', 'view', 'edit', 'index', 'join'), 'users' => array('@')),
       
       // Default to deny all other actions
       array('deny', 'users' => array('*')),
     );
   }
   
+  public function actionJoin() {
+    if($this->isPost()) {
+      $group = Group::model()->findByPk($_GET['id']);
+      $user  = User::model()->findByPk($_GET['user_id']);
+      $this->requireAccess('ownItems', array('user_id' => $user->id));
+      if($group->inGroup($user)) {
+        $this->flash('alert', "User is already part of this group");
+      } else {
+        $group->addUser($user);
+        $this->flash('success', 'User added successfully to group');
+      }
+      $this->redirect(array('groups/view', 'id' => $group->id));
+    }
+  }
+  
+  
   /**
    * @todo validate if the current user should be able to view this
    */
   public function actionView() {
     $group = Group::model()->findByPk($_GET['id']);
-    $this->render(array('group' => $group));
+    $students = new CActiveDataProvider('User', array(
+      'criteria' => array(
+        'with' => 'groups',
+        'condition' => 'groups.id = ' . $group->id,
+        'order'    => 't.last_name',
+        'together' => true
+      ),
+      'pagination' => array('pageSize' => 20),
+    ));
+    $this->render(array('group' => $group, 'students' => $students));
   }
   
   public function actionNew() {
