@@ -1,6 +1,6 @@
-<h2>Log in</h2>
-
-<?php echo form_for($user, function($f) { ?>
+<?php
+  echo $this->page_title('Log In');
+  echo form_for($user, function($f) { ?>
 <div class="form">
   <div class="item">
     <?php

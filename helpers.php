@@ -8,6 +8,7 @@ define('APP_TIMESTAMP', 'MM/dd/yyyy hh:mm a');
 define('APP_SQL_TIMESTAMP', 'yyyy-MM-dd HH:mm:ss');
 define('THE_SQL_TIMESTAMP', 'Y-m-d H:i:s');
 define('HUMAN_TIMESTAMP', 'F j \a\t g:i a');
+define('US_TIMESTAMP', 'M d, Y g:i:s a');
  
  
 /**

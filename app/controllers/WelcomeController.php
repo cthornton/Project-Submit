@@ -2,6 +2,8 @@
 
 class WelcomeController extends Controller {
   
+  public $layout = 'one_column';
+  
   public function allowedActions() {
     return 'index, error';
   }

@@ -2,8 +2,12 @@
 
 class UsersController extends Controller {
   
+  
+  public $layout = 'one_column';
+  
   public function accessRules() {
     return array(
+      array('allow', 'actions' => array('index'), 'roles' => array('admin')),
       array('allow', 'actions' => array('new', 'login'), 'users' => array('?')),
       array('allow', 'actions' => array('logout', 'view', 'edit'), 'users' => array('@')),
       
@@ -12,7 +16,21 @@ class UsersController extends Controller {
     );
   }
   
+  /**
+   * Views all users. Only available as admin
+   */
+  public function actionIndex() {
+    $users = new CActiveDataProvider('User', array(
+        'criteria' => array(
+          'with' => 'role'
+        ),
+      ));
+    $this->render(array('users' => $users));
+  }
   
+  /**
+   * Creates a new user
+   */
   public function actionNew() {
     $user = new User('register');
     if($this->isPost()) {
@@ -29,6 +47,9 @@ class UsersController extends Controller {
     $this->render(array('user' => $user));
   }
   
+  /**
+   * Edits an existing user
+   */
   public function actionEdit() {
     $user = User::model()->findByPk($_GET['id']);
     if($this->isPost()) {
@@ -62,13 +83,14 @@ class UsersController extends Controller {
   public function actionLogin() {
     if($this->isPost()) {
       $identity = new UserIdentity($_POST['User']['username'], $_POST['User']['password']);
+      $user = $identity->getTemporaryUser();
       
       if($identity->authenticate()) {
         Yii::app()->user->login($identity);
         $this->flash("success", "Login successful.");
-        return $this->redirect("/");
+        return $this->redirect(array('users/view', 'id' => $this->user->id));
       }
-      $user = $identity->getTemporaryUser();
+      
     } else {
       $user = new User;
     }

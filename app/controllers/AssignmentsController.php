@@ -38,9 +38,34 @@ class AssignmentsController extends Controller {
     $this->render(array('assignments' => $dataProvider));
   }
   
+  /**
+   * @todo don't allow just anyone to view!
+   */
   public function actionView() {
     $assignment = Assignment::model()->findByPk($_GET['id']);
-    $this->render(array('assignment' => $assignment));
+    
+    
+    if($this->user->isStudent) {
+      $criteria = array(
+        'with' => array('group.students', 'user'),
+        'together' => true,
+        'condition' => 't.assignment_id = ' . $assignment->id . ' AND students.id = ' . $this->user->id,
+        'order' => 't.submitted_at asc'
+      );
+    } else {
+      $criteria = array(
+        'with' => array('group', 'user'),
+        'condition' => 'assignment_id = ' . $assignment->id,
+        'order' => 't.submitted_at asc',
+      );
+    }
+    
+    $submissions = new CActiveDataProvider('Submission', array(
+      'criteria' => $criteria
+    ));
+    
+    
+    $this->render(array('assignment' => $assignment, 'submissions' => $submissions));
   }
   
   

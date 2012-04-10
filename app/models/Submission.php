@@ -6,6 +6,7 @@ class Submission extends ModelBase {
 
   public function rules() {
     return array(
+      array('title, description', 'safe'),
       array('assignment, user, group, submitted_at', 'required'),
       array('attachment', 'file', 'maxSize' =>  10485760, 'allowEmpty' => true),
     );
@@ -18,6 +19,17 @@ class Submission extends ModelBase {
       'user'       => array(self::BELONGS_TO, 'User', 'user_id'),
       'group'      => array(self::BELONGS_TO, 'Group', 'course_group_id')
     );
+  }
+  
+  
+  public function getLocalFilePath() {
+    return Yii::app()->basePath . '/data/uploads/submission_' . $this->id . '.dat';
+  }
+  
+  public function getIsLate() {
+    $due = $this->assignment->timestampize('due_at');
+    $submitted = $this->timestampize('submitted_at');
+    return ($due - $submitted) <= 0;
   }
   
 }
