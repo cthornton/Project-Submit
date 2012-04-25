@@ -1,0 +1,4 @@
+#!/usr/bin/env php
+<?php
+// Console utilities
+require_once(dirname(__FILE__).'/script/submit.php');

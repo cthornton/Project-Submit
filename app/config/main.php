@@ -17,8 +17,6 @@ return array(
   'import'=>array(
     'application.models.*',
     'application.components.*',
-    'application.modules.rights.*',
-    'application.modules.rights.components.*',
   ),
 
   'defaultController'=>'welcome',
