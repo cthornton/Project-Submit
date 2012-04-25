@@ -1,4 +1,7 @@
 <?php
+
+date_default_timezone_set("America/Phoenix");
+
 // Get config options
 $cfg = require_once(dirname(__FILE__) . '/../config.php');
 

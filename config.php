@@ -1,4 +1,6 @@
 <?php
+
+
 /**
  * General configuration options
  */
@@ -18,7 +20,7 @@ $cfg = array(
   // Enable / Disable Debug mode
   // Set to TRUE in DEVELOPMENT
   // Set to FALSE in PRODUCTION (live)
-  'env_debug' => false,
+  'env_debug' => true,
   
   'db_cnx_str' => '',
 );

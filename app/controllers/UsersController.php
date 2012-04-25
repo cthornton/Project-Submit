@@ -81,18 +81,20 @@ class UsersController extends Controller {
   }
   
   public function actionLogin() {
+    $user = new User;
+    
     if($this->isPost()) {
       $identity = new UserIdentity($_POST['User']['username'], $_POST['User']['password']);
-      $user = $identity->getTemporaryUser();
+      
       
       if($identity->authenticate()) {
         Yii::app()->user->login($identity);
         $this->flash("success", "Login successful.");
         return $this->redirect(array('users/view', 'id' => $this->user->id));
+      } else {
+        $this->flash("alert", "Invalid username or password");
       }
       
-    } else {
-      $user = new User;
     }
     $this->render('login', array('user' => $user));
   }

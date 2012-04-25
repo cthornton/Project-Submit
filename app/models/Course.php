@@ -13,7 +13,7 @@ class Course extends ModelBase {
     return array(
       'instructor'  => array(self::BELONGS_TO, 'User', 'user_id'),
       'groups'      => array(self::HAS_MANY, 'Group', 'course_id'),
-      'students'    => array(self::MANY_MANY, 'User', 'courses_users(user_id, course_id)'),
+      'students'    => array(self::MANY_MANY, 'User', 'courses_users(course_id, user_id)'),
       'assignments' => array(self::HAS_MANY, 'Assignment', 'course_id'),
     );
   }

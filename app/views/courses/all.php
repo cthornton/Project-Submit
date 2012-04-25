@@ -31,5 +31,5 @@
   ));
 ?>
 <div class="form-actions">
-  <?php echo link_to('Cancel', array('courses/index'), array('class' => 'btn')); ?>
+  <?php echo link_to('My Enrolled Courses', array('courses/index'), array('class' => 'btn')); ?>
 </div>
