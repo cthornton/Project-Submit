@@ -7,7 +7,7 @@ echo $this->page_title('My Assignments');
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
   'dataProvider' => $assignments,
-  'itemsCssClass' => 'table table-striped',
+  'itemsCssClass' => 'table table-striped table-bordered',
   'columns' => array(
     array(
       'name' => 'name',
@@ -21,7 +21,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
     ),
     array(
       'name' => 'submit',
-      'value' => 'link_to("Submit", array("submissions/new", "assignment_id" => $data->id), array("class" => "btn btn-mini"))',
+      'value' => 'link_to("<i class=\"icon-upload\"></i> Submit", array("submissions/new", "assignment_id" => $data->id), array("class" => "btn btn-mini"))',
       'type' => 'raw'
     ),
   )

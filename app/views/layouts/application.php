@@ -75,8 +75,7 @@ Yii::app()->clientScript->registerCoreScript('jquery');
     ?>
 
 		<div class="footer">
-			<p><a href="#">RSS Feed</a> | <a href="#">Contact</a> | <a href="#">Accessibility</a> | <a href="#">Products</a> | <a href="#">Disclaimer</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> and <a href="http://validator.w3.org/check?uri=referer">XHTML</a><br />
-			&copy; Copyright 2006 Internet Music, Design: Luka Cvrk, <a title="Awsome Web Templates" href="http://www.solucija.com/">Solucija</a></p>
+			&copy; Copyright 2011 Christopher Thornton, Design: Luka Cvrk, <a title="Awsome Web Templates" href="http://www.solucija.com/">Solucija</a></p>
 		</div>
 	</div>
 </body>

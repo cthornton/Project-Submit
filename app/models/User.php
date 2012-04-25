@@ -32,7 +32,7 @@ class User extends ModelBase {
   
   
   public function attributeLabels() {
-    return array('role' => 'User Type');
+    return array('role_id' => 'User Type');
   }
   
   public function getIsProfessor() {

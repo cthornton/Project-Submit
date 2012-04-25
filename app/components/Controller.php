@@ -73,7 +73,8 @@ class Controller extends CController {
   
   public function page_title($text, $subtext = null) {
     $this->pageTitle = $text . " | " . Yii::app()->name;
-    $txt = '<div class="page-title"><h1>' . $text;
+    $this->breadcrumbs[] = $text;
+    $txt = '<div class="page-title"><h1>' . htmlentities($text);
     if(!empty($subtext))
       $txt .= ' <small>' . $subtext . '</small>';
     return $txt . '</h1></div>';

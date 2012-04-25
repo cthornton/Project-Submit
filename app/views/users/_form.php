@@ -2,15 +2,17 @@
 <div class="form">
   <h3>Account Information</h3>
   
-  <div class="item item-inline">
-    <?php
-      echo $f->label('username');
-      echo $f->textField('username');
-    ?>
-  </div>
-  
-  <div class="item item-inline">
-    <?php echo $f->label('email'). $f->textField('email'); ?>
+  <div>
+    <div class="item item-inline">
+      <?php
+        echo $f->label('username');
+        echo $f->textField('username');
+      ?>
+    </div>
+    
+    <div class="item item-inline">
+      <?php echo $f->label('email'). $f->textField('email'); ?>
+    </div>
   </div>
   
   
@@ -31,7 +33,7 @@
   <?php if($user->isNewRecord) { ?>
   <div class="item">
     <?php echo $f->label('role_id'); ?>
-    <?php echo $f->dropDownList('role_id', array(2 => 'Professor', 3 => 'Student')); ?>
+    <?php echo $f->dropDownList('role_id', array(3 => 'Student', 2 => 'Professor')); ?>
   </div>
   <?php } else { ?>
   <div class="item">
@@ -61,9 +63,9 @@
   <?php echo $f->submit(null, array('class' => 'btn btn-primary')); ?>
   <?php
     if($user->isNewRecord)
-      echo link_to('Back', '/', array('class' => 'btn'));
+      echo link_to('Cancel', '/', array('class' => 'btn'));
     else
-      echo link_to('Back', $user, array('class' => 'btn'));
+      echo link_to('Cancel', $user, array('class' => 'btn'));
   ?>
 </div>
   

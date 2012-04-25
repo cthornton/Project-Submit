@@ -1,9 +1,15 @@
 <?php
-  $this->breadcrumbs = array();
+  $this->breadcrumbs = array(
+    'Courses' => array('courses/index'),
+  );
   echo $this->page_title('All Available Courses');
+?>
+<p>These are all of the courses available for you to enroll in.</p>
+
+<?php  
   $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider' => $courses,
-    'itemsCssClass' => 'table table-striped',
+    'itemsCssClass' => 'table table-striped  table-bordered',
     'columns' => array(
       'name',
       'description',

@@ -17,3 +17,22 @@ small a {
 .page-title {
   margin-bottom: 15px;
 }
+
+.grid-view .summary {
+  display: none;
+}
+
+.grid-view {
+  padding-top: 5px !important;
+  padding-bottom: 0px !important;
+  margin-bottom: 15px;
+  overflow: auto;
+}
+
+.grid-view table {
+  margin-bottom: 0;
+}
+
+.users-table {
+  width: 900px;
+}

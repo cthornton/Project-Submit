@@ -1,4 +1,4 @@
-<h2>Create new Account</h2>
+<?php echo $this->page_title('Create Account', 'your adventure begins here'); ?>
 <p>
   Fill out the following form to create a new user account
 </p>

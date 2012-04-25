@@ -5,8 +5,7 @@ class GroupsController extends Controller {
   
   public function accessRules() {
     return array(
-      array('allow', 'actions' => array('new', 'edit', 'delete'), 'roles' => array('admin', 'professor', 'student')),
-      array('allow', 'actions' => array('logout', 'view', 'edit', 'index', 'join'), 'users' => array('@')),
+      array('allow', 'actions' => array('logout', 'view', 'edit', 'index', 'join', 'students', 'new'), 'users' => array('@')),
       
       // Default to deny all other actions
       array('deny', 'users' => array('*')),
@@ -20,6 +19,8 @@ class GroupsController extends Controller {
       $this->requireAccess('ownItems', array('user_id' => $user->id));
       if($group->inGroup($user)) {
         $this->flash('alert', "User is already part of this group");
+      } elseif(!$user->isStudent) {
+        $this->flash('alert', "Only a student can be enrolled in a group");
       } else {
         $group->addUser($user);
         $this->flash('success', 'User added successfully to group');
@@ -34,6 +35,23 @@ class GroupsController extends Controller {
    */
   public function actionView() {
     $group = Group::model()->findByPk($_GET['id']);
+    
+    $submissions = new CActiveDataProvider('Submission', array(
+      'criteria' => array(
+        'with' => array('group', 'assignment', 'user'),
+        'condition' => 'group.id = ' . $group->id,
+        'order' => 't.submitted_at asc'
+      )
+    ));
+    
+    $this->render(array('group' => $group, 'submissions' => $submissions));
+  }
+  
+  /**
+   * @todo validate if the current user should be able to view this
+   */
+  public function actionStudents() {
+    $group = Group::model()->findByPk($_GET['id']);
     $students = new CActiveDataProvider('User', array(
       'criteria' => array(
         'with' => 'groups',
@@ -43,6 +61,7 @@ class GroupsController extends Controller {
       ),
       'pagination' => array('pageSize' => 20),
     ));
+    
     $this->render(array('group' => $group, 'students' => $students));
   }
   
